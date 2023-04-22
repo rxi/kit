@@ -370,6 +370,7 @@ void kit_destroy(kit_Context *ctx) {
     ReleaseDC(ctx->hwnd, ctx->hdc);
     DestroyWindow(ctx->hwnd);
     kit_destroy_font(ctx->font);
+    kit_destroy_image(ctx->screen);
     free(ctx);
 }
 
