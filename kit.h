@@ -370,6 +370,7 @@ kit_Context* kit_create(const char *title, int w, int h, int flags) {
 void kit_destroy(kit_Context *ctx) {
     ReleaseDC(ctx->hwnd, ctx->hdc);
     DestroyWindow(ctx->hwnd);
+    kit_destroy_image(ctx->screen);
     kit_destroy_font(ctx->font);
     free(ctx);
 }
