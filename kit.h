@@ -1,4 +1,4 @@
-// kit v0.1 | public domain - no warranty implied; use at your own risk
+// kit v0.2 | public domain - no warranty implied; use at your own risk
 
 #ifndef KIT_H
 #define KIT_H
