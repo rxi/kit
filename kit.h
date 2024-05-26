@@ -256,7 +256,7 @@ static LRESULT CALLBACK kit__wndproc(HWND hWnd, UINT message, WPARAM wParam, LPA
     case WM_KEYUP:
     case WM_SYSKEYUP:
         ctx->key_state[(uint8_t) wParam] &= ~KIT_INPUT_DOWN;
-        ctx->key_state[(uint8_t) wParam] |= KIT_INPUT_RELEASED;
+        ctx->key_state[(uint8_t) wParam] |=  KIT_INPUT_RELEASED;
         break;
 
     case WM_CHAR:
@@ -279,6 +279,7 @@ static LRESULT CALLBACK kit__wndproc(HWND hWnd, UINT message, WPARAM wParam, LPA
         } else {
             ReleaseCapture();
             ctx->mouse_state[button] &= ~KIT_INPUT_DOWN;
+            ctx->mouse_state[button] |=  KIT_INPUT_RELEASED;
         }
         // fallthrough
 
@@ -405,7 +406,7 @@ bool kit_step(kit_Context *ctx, double *dt) {
         ctx->key_state[i] &= ~(KIT_INPUT_PRESSED | KIT_INPUT_RELEASED);
     }
     for (int i = 0; i < sizeof(ctx->mouse_state); i++) {
-        ctx->key_state[i] &= ~(KIT_INPUT_PRESSED | KIT_INPUT_RELEASED);
+        ctx->mouse_state[i] &= ~(KIT_INPUT_PRESSED | KIT_INPUT_RELEASED);
     }
 
     // handle events
