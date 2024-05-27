@@ -21,6 +21,12 @@
 #pragma comment(lib, "winmm.lib")
 #endif
 
+#ifdef BUILD_DLL
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#define DLL_EXPORT
+#endif
+
 enum {
     KIT_SCALE2X    = (1 << 0),
     KIT_SCALE3X    = (1 << 1),
