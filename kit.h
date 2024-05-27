@@ -21,6 +21,12 @@
 #pragma comment(lib, "winmm.lib")
 #endif
 
+#ifdef BUILD_DLL
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#define DLL_EXPORT
+#endif
+
 enum {
     KIT_SCALE2X    = (1 << 0),
     KIT_SCALE3X    = (1 << 1),
@@ -72,41 +78,41 @@ typedef struct {
 #define KIT_WHITE    kit_rgb(0xff, 0xff, 0xff)
 #define KIT_BLACK    kit_rgb(0, 0, 0)
 
-kit_Context* kit_create(const char *title, int w, int h, int flags);
-void kit_destroy(kit_Context *ctx);
-bool kit_step(kit_Context *ctx, double *dt);
-void* kit_read_file(char *filename, int *len);
+DLL_EXPORT kit_Context *kit_create(const char *title, int w, int h, int flags);
+DLL_EXPORT void kit_destroy(kit_Context *ctx);
+DLL_EXPORT bool kit_step(kit_Context *ctx, double *dt);
+DLL_EXPORT void *kit_read_file(char *filename, int *len);
 
-kit_Image* kit_create_image(int w, int h);
-kit_Image* kit_load_image_file(char *filename);
-kit_Image* kit_load_image_mem(void *data, int len);
-void kit_destroy_image(kit_Image *img);
+DLL_EXPORT kit_Image *kit_create_image(int w, int h);
+DLL_EXPORT kit_Image *kit_load_image_file(char *filename);
+DLL_EXPORT kit_Image *kit_load_image_mem(void *data, int len);
+DLL_EXPORT void kit_destroy_image(kit_Image *img);
 
-kit_Font* kit_load_font_file(char *filename);
-kit_Font* kit_load_font_mem(void *data, int len);
-void kit_destroy_font(kit_Font *font);
-int kit_text_width(kit_Font *font, char *text);
+DLL_EXPORT kit_Font *kit_load_font_file(char *filename);
+DLL_EXPORT kit_Font *kit_load_font_mem(void *data, int len);
+DLL_EXPORT void kit_destroy_font(kit_Font *font);
+DLL_EXPORT int kit_text_width(kit_Font *font, char *text);
 
-int  kit_get_char(kit_Context *ctx);
-bool kit_key_down(kit_Context *ctx, int key);
-bool kit_key_pressed(kit_Context *ctx, int key);
-bool kit_key_released(kit_Context *ctx, int key);
-void kit_mouse_pos(kit_Context *ctx, int *x, int *y);
-void kit_mouse_delta(kit_Context *ctx, int *x, int *y);
-bool kit_mouse_down(kit_Context *ctx, int button);
-bool kit_mouse_pressed(kit_Context *ctx, int button);
-bool kit_mouse_released(kit_Context *ctx, int button);
+DLL_EXPORT int kit_get_char(kit_Context *ctx);
+DLL_EXPORT bool kit_key_down(kit_Context *ctx, int key);
+DLL_EXPORT bool kit_key_pressed(kit_Context *ctx, int key);
+DLL_EXPORT bool kit_key_released(kit_Context *ctx, int key);
+DLL_EXPORT void kit_mouse_pos(kit_Context *ctx, int *x, int *y);
+DLL_EXPORT void kit_mouse_delta(kit_Context *ctx, int *x, int *y);
+DLL_EXPORT bool kit_mouse_down(kit_Context *ctx, int button);
+DLL_EXPORT bool kit_mouse_pressed(kit_Context *ctx, int button);
+DLL_EXPORT bool kit_mouse_released(kit_Context *ctx, int button);
 
-void kit_clear(kit_Context *ctx, kit_Color color);
-void kit_set_clip(kit_Context *ctx, kit_Rect rect);
-void kit_draw_point(kit_Context *ctx, kit_Color color, int x, int y);
-void kit_draw_rect(kit_Context *ctx, kit_Color color, kit_Rect rect);
-void kit_draw_line(kit_Context *ctx, kit_Color color, int x1, int y1, int x2, int y2);
-void kit_draw_image(kit_Context *ctx, kit_Image *img, int x, int y);
-void kit_draw_image2(kit_Context *ctx, kit_Color color, kit_Image *img, int x, int y, kit_Rect src);
-void kit_draw_image3(kit_Context *ctx, kit_Color mul_color, kit_Color add_color, kit_Image *img, kit_Rect dst, kit_Rect src);
-int  kit_draw_text(kit_Context *ctx, kit_Color color, char *text, int x, int y);
-int  kit_draw_text2(kit_Context *ctx, kit_Color color, kit_Font *font, char *text, int x, int y);
+DLL_EXPORT void kit_clear(kit_Context *ctx, kit_Color color);
+DLL_EXPORT void kit_set_clip(kit_Context *ctx, kit_Rect rect);
+DLL_EXPORT void kit_draw_point(kit_Context *ctx, kit_Color color, int x, int y);
+DLL_EXPORT void kit_draw_rect(kit_Context *ctx, kit_Color color, kit_Rect rect);
+DLL_EXPORT void kit_draw_line(kit_Context *ctx, kit_Color color, int x1, int y1, int x2, int y2);
+DLL_EXPORT void kit_draw_image(kit_Context *ctx, kit_Image *img, int x, int y);
+DLL_EXPORT void kit_draw_image2(kit_Context *ctx, kit_Color color, kit_Image *img, int x, int y, kit_Rect src);
+DLL_EXPORT void kit_draw_image3(kit_Context *ctx, kit_Color mul_color, kit_Color add_color, kit_Image *img, kit_Rect dst, kit_Rect src);
+DLL_EXPORT int kit_draw_text(kit_Context *ctx, kit_Color color, char *text, int x, int y);
+DLL_EXPORT int kit_draw_text2(kit_Context *ctx, kit_Color color, kit_Font *font, char *text, int x, int y);
 
 #endif // KIT_H
 
