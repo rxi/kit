@@ -1,4 +1,4 @@
-// kit v0.2 | public domain - no warranty implied; use at your own risk
+// kit v0.3 | public domain - no warranty implied; use at your own risk
 
 #ifndef KIT_H
 #define KIT_H
@@ -409,6 +409,7 @@ bool kit_step(kit_Context *ctx, double *dt) {
     for (int i = 0; i < sizeof(ctx->mouse_state); i++) {
         ctx->mouse_state[i] &= ~(KIT_INPUT_PRESSED | KIT_INPUT_RELEASED);
     }
+    memset(&ctx->mouse_delta, 0, sizeof(ctx->mouse_delta));
 
     // handle events
     MSG msg;
